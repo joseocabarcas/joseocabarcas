@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+// Data configuration
+const personalInfo = {
+  name: "José Cabarcas",
+  role: "Frontend & Mobile Developer",
+  subtitle: "Building scalable solutions and leading teams to deliver high-quality products!",
+  bio: [
+    "Hi, I'm José Cabarcas! I am a dedicated Frontend and Mobile Developer with over 9 years of experience in software engineering, consistently evolving and adapting within the dynamic world of technology.",
+    "My career began in 2014, focusing on developing clinical projects with technologies like Angular, Laravel, and Java for Android. As I progressed, I embraced more complex challenges, such as developing real-time features for a social network, where I tackled the intricate task of implementing a live chat component.",
+    "Throughout my journey, I have expanded my skill set to include state management, mobile-first development with React Native, and full-stack capabilities using Node.js, Go, and Vue.js. My technical versatility has been key to my success, enabling me to contribute effectively in diverse environments and projects.",
+    "In recent years, I have stepped into leadership roles, where I have driven initiatives to standardize codebases, improve application performance, and ensure scalability. I currently lead the architecture and development of new web applications, leveraging modern technologies and design patterns to guide teams in delivering high-quality, scalable products."
+  ],
+  experience: "I am passionate about crafting efficient solutions, mentoring teams, and continuously pushing the boundaries of software development."
+};
+
+const skills = [
+  {
+    name: "React",
+    icon: "⚛️",
+    color: "#61dafb",
+    category: "Frontend"
+  },
+  {
+    name: "React Native",
+    icon: "📱",
+    color: "#61dafb",
+    category: "Mobile"
+  },
+  {
+    name: "TypeScript",
+    icon: "TS",
+    color: "#3178c6",
+    category: "Language"
+  },
+  {
+    name: "Next.js",
+    icon: "▲",
+    color: "#000000",
+    category: "Framework"
+  },
+  {
+    name: "Node.js",
+    icon: "🟢",
+    color: "#339933",
+    category: "Backend"
+  },
+  {
+    name: "Go",
+    icon: "🐹",
+    color: "#00add8",
+    category: "Backend"
+  },
+  {
+    name: "Kotlin",
+    icon: "🎯",
+    color: "#7f52ff",
+    category: "Mobile"
+  },
+  {
+    name: "Expo",
+    icon: "⚡",
+    color: "#000020",
+    category: "Mobile"
+  },
+  {
+    name: "Leadership",
+    icon: "👥",
+    color: "#2ecc71",
+    category: "Soft Skill"
+  },
+  {
+    name: "Architecture",
+    icon: "🏗️",
+    color: "#e67e22",
+    category: "Design"
+  }
+];
+
+const projects = [
+  {
+    title: "Real-time Social Network",
+    description: "Developed real-time features including live chat component for a social network platform, handling complex user interactions and real-time data synchronization.",
+    technologies: ["React", "Node.js", "WebSocket", "TypeScript"],
+    liveUrl: "https://example.com",
+    githubUrl: "https://github.com/example"
+  },
+  {
+    title: "Clinical Management System",
+    description: "Built robust clinical project management applications focusing on user-centric solutions with modern web technologies and mobile applications.",
+    technologies: ["Angular", "Laravel", "Java", "Android"],
+    liveUrl: "https://example.com",
+    githubUrl: "https://github.com/example"
+  },
+  {
+    title: "Cross-Platform Mobile App",
+    description: "Led the architecture and development of a mobile-first application using React Native and Expo, focusing on performance optimization and scalability.",
+    technologies: ["React Native", "Expo", "TypeScript", "Go"],
+    liveUrl: "https://example.com",
+    githubUrl: "https://github.com/example"
+  },
+  {
+    title: "Enterprise Web Applications",
+    description: "Currently leading the architecture and development of new web applications, implementing modern design patterns and guiding teams in delivering scalable products.",
+    technologies: ["Next.js", "React", "Node.js", "TypeScript"],
+    liveUrl: "https://example.com",
+    githubUrl: "https://github.com/example"
+  }
+];
+
+const socialLinks = [
+  {
+    name: "GitHub",
+    url: "https://github.com/josecabarcas",
+    icon: "🐙",
+    color: "#333333"
+  },
+  {
+    name: "LinkedIn", 
+    url: "https://linkedin.com/in/josecabarcas",
+    icon: "💼",
+    color: "#0077b5"
+  },
+  {
+    name: "YouTube",
+    url: "https://youtube.com/@josecabarcas",
+    icon: "📺",
+    color: "#ff0000"
+  },
+  {
+    name: "Twitch",
+    url: "https://twitch.tv/josecabarcas",
+    icon: "🎮",
+    color: "#9146ff"
+  }
+];
+---
+
+<Layout title="José Cabarcas - Frontend & Mobile Developer">
+  <Header />
+  <main>
+    <Hero name={personalInfo.name} subtitle={personalInfo.subtitle} />
+    <About 
+      name={personalInfo.name}
+      role={personalInfo.role}
+      bio={personalInfo.bio}
+      experience={personalInfo.experience}
+    />
+    <Skills skills={skills} />
+    <Projects projects={projects} />
+    <Contact socialLinks={socialLinks} />
+  </main>
+  <Footer />
+</Layout>

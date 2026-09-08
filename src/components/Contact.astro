@@ -1,0 +1,247 @@
+---
+import Section from './Section.astro';
+
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+  color: string;
+}
+
+interface Props {
+  socialLinks: SocialLink[];
+}
+
+const { socialLinks } = Astro.props;
+---
+
+<Section id="contact" title="Contact" subtitle="Feel free to get in touch, it will be a great pleasure to be able to help you with your project, contact me now!">
+  <div class="contact-content">
+    <div class="contact-info">
+      <div class="social-links">
+        {socialLinks.map(social => (
+          <a 
+            href={social.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="social-link"
+            style={`--social-color: ${social.color}`}
+            aria-label={social.name}
+          >
+            <div class="social-icon">
+              {social.icon}
+            </div>
+            <span class="social-name">{social.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="contact-illustration">
+      <div class="illustration-container">
+        <div class="chat-bubble main-bubble">
+          <span>💬</span>
+        </div>
+        <div class="chat-bubble question-bubble">
+          <span>❓</span>
+        </div>
+        <div class="person-illustration">
+          <div class="person-body">
+            <div class="person-head">
+              <span>👨‍💻</span>
+            </div>
+          </div>
+        </div>
+        <div class="dots-pattern"></div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: #ffffff;
+  }
+
+  .social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--social-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .social-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--social-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .social-link:hover .social-icon {
+    transform: scale(1.1);
+  }
+
+  .social-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .contact-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .illustration-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .person-illustration {
+    position: relative;
+    z-index: 3;
+  }
+
+  .person-body {
+    width: 120px;
+    height: 120px;
+    background: #2ecc71;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .person-head {
+    position: absolute;
+    top: -30px;
+    width: 60px;
+    height: 60px;
+    background: #f39c12;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .chat-bubble {
+    position: absolute;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .main-bubble {
+    top: 20px;
+    right: -20px;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+  }
+
+  .question-bubble {
+    top: -10px;
+    left: -30px;
+    width: 50px;
+    height: 50px;
+    animation-delay: 1.5s;
+  }
+
+  .dots-pattern {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-image: radial-gradient(circle, rgba(46, 204, 113, 0.3) 2px, transparent 2px);
+    background-size: 20px 20px;
+    border-radius: 50%;
+    z-index: 1;
+    animation: rotate 20s linear infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .illustration-container {
+      width: 250px;
+      height: 250px;
+    }
+    
+    .social-link {
+      padding: 0.75rem 1rem;
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.25rem;
+    }
+  }
+</style>
