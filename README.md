@@ -1,32 +1,37 @@
-# josecabarcas.dev
+### Hi there 👋 I'm José Cabarcas
 
-Personal portfolio of **José Cabarcas** — Senior Software Engineer (frontend & mobile specialist, 11+ years), Barranquilla, Colombia.
+**Senior Software Engineer** 🚀 | Frontend & Mobile Specialist | Barranquilla, Colombia 🇨🇴
 
-**Live:** https://www.josecabarcas.dev
+🔭 **Currently:** Open to new opportunities
 
-Built as a custom NBA player-profile experience: a compact player-card hero above the fold, then scroll sections styled like an athlete profile — Career Stats, Season Log (career timeline 2014→2026), Attributes (qualitative skill levels), Highlights, Game Log (project case studies), and Draft Me (contact).
+I've spent **11+ years** building frontend and mobile products used by millions — from leading 5–7 engineer teams as Tech Lead/Staff at Elenas (3M+ downloads) to designing monorepo architectures. I deliberately take backend work when the problem demands it, and I ship with **Spec-Driven Development** (Claude Code, Cursor, Codex).
 
-## Stack
+🛠 **Tech & tools**
 
-- **Astro 5** — `output: 'static'`, zero framework hydration
-- **TypeScript** strict; typed content module (`src/data/profile.ts`) as the single source of professional claims
-- **CSS custom properties** design system (dark stadium, one electric accent) in `src/styles/global.css`
-- Progressive enhancement only (`src/scripts/site.ts`): accessible mobile menu + reduced-motion-gated reveals
-- **Vercel** CDN deployment (Git integration; previews via CLI)
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![React Native](https://img.shields.io/badge/React_Native-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![Expo](https://img.shields.io/badge/Expo-000020?style=flat&logo=expo&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)
+![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=flat&logo=graphql&logoColor=white)
 
-## Development
+📊 **Highlights**
 
-```sh
-pnpm install
-pnpm dev       # local dev server
-pnpm build     # astro check && astro build — the mandatory verification gate
-pnpm preview   # serve the production build locally
-```
+- 🚀 App scale: 3M+ downloads, 200K+ DAU (Elenas, historical)
+- ⚡ Performance: startup 24s→7s, checkout 14s→5s
+- 🏗 Architecture: monorepos, micro-frontends, Clean Architecture
+- 🤖 AI-assisted: SDD daily driver
 
-## Content discipline
+📫 **How to reach me:** josecabarcas94@gmail.com · [LinkedIn](https://linkedin.com/in/jose-cabarcas) · [Portfolio](https://www.josecabarcas.dev)
 
-Every professional claim on the site traces to the verified career context. Content lives exclusively in `src/data/profile.ts` — edit facts there, never in components. Historical metrics (e.g. Elenas 3M+ downloads / 200K+ DAU) are explicitly framed as historical context.
+⚡ **Fun fact:** I picked up Ruby on Rails to build a microservice the product needed — the stack follows the problem, not the other way around.
 
-## Project history
+<details>
+<summary>About this repository</summary>
 
-This site was rebuilt from the Astro starter through a full Spec-Driven Development flow. The complete planning record — proposal, 13 domain specs, design, task breakdown, apply progress, and the envelope-validated verify report — lives under [`openspec/`](openspec/), with the pre-rebuild state preserved at the `baseline-pre-nba-rebuild` git tag.
+This is also the source of <a href="https://www.josecabarcas.dev">josecabarcas.dev</a> — a custom NBA player-profile portfolio built with Astro 5, TypeScript, and a typed content module, deployed as a fully static site on Vercel.
+
+Project docs: <a href="/docs/PROJECT.md">docs/PROJECT.md</a>.
+</details>
