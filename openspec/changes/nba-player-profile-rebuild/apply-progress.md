@@ -93,3 +93,24 @@ allowBuilds:
 - Working tree holds the full rebuild (uncommitted, awaiting user review/commit decision).
 - Build evidence: `dist/` static output, audits above.
 - Rollback: `baseline-pre-nba-rebuild` tag (local + origin).
+
+## Content iteration 1 (2026-09-08, post-manual-review)
+
+Maintainer-reviewed the rebuild (local preview) and requested content changes; documented in the design addendum:
+
+1. Title → **Senior Software Engineer**; hero status badge → **Open to new opportunities** (Monokera remains in Season Log only).
+2. Positioning + bio → approved Opción A texts; bio rendered as two paragraphs.
+3. Attributes → new **AI-assisted development** group (Primary): Claude Code, Cursor, Codex, SDD.
+4. Game Log → 7 case studies: + **Elenas App** (historical 3M+/200K+ framing) and **Elenas Web** (Turborepo + published packages).
+
+Execution: mostly implemented by the maintainer's parallel Claude Code session (commit `a00d437`, signed, pushed); reconciled by this session — footer stale role fixed (`468265f`), approved bio applied (`d0c5593`). Build green; audits pass (landmarks, ids, hrefs, `lang="en"`, FSE occurrences all historical).
+
+## Task 20 — manual review: DONE (user)
+
+User reviewed the rebuild at localhost preview and approved visuals/interaction with content feedback — all feedback implemented and re-verified.
+
+## Task 21 — deployment
+
+- Vercel Git integration serves `origin/main`; production (`josecabarcas.dev`) currently serves `a00d437`.
+- Preview deployment of final state (bio + footer): https://josecabarcas-gw4mu5xel-jose-cabarcas-projects.vercel.app (Ready, Vercel SSO protected).
+- **Pending (user action):** review preview + promote to production from the Vercel dashboard.
