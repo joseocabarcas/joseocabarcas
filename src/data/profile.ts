@@ -31,7 +31,7 @@ export interface HeroIdentity {
   status: 'Open to new opportunities';
   location: 'Barranquilla, Colombia';
   positioning: string;
-  bio: string;
+  bio: ReadonlyArray<string>;
   headshot: HeadshotAsset;
   heroStatKeys: ReadonlyArray<string>;
 }
@@ -139,7 +139,10 @@ const hero: HeroIdentity = {
   location: 'Barranquilla, Colombia',
   positioning:
     'Senior Software Engineer with 11+ years shipping frontend and mobile products used by millions — leading teams and architecture, and deliberately crossing into backend when the problem demands it.',
-  bio: 'I started in 2014 at Janus IT with broad back-end, front-end, and mobile-testing exposure, then grew into frontend and mobile specialization and technical leadership — Tech Lead, then Frontend Staff Engineer at Elenas. Today my core workflow is Spec-Driven Development: define acceptance criteria precisely, review AI-generated first passes, validate them layer by layer against the criteria, and describe failures precisely enough for them to be corrected. I take on backend work deliberately when the problem requires it.',
+  bio: [
+    '11+ years across six teams: from broad early-career exposure — backend, frontend, mobile testing — at Janus IT, to leading 5–7 engineers as Tech Lead and Frontend Staff Engineer at Elenas, a social commerce platform that reached 3M+ downloads and 200K+ daily active users.',
+    'Today I ship with Spec-Driven Development: precise acceptance criteria, AI-generated first passes, and layer-by-layer validation before anything integrates. Backend (Node.js, Go, Rails) whenever the problem needs it.',
+  ],
   headshot,
   heroStatKeys: ['experience', 'led-team'],
 };

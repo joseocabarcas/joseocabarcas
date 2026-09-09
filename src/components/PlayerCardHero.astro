@@ -62,7 +62,9 @@ const emailLink = links.find((link) => link.kind === 'email') as ProfileLink;
         <span class="status-badge">{identity.status}</span>
       </p>
       <p class="hero-positioning">{identity.positioning}</p>
-      <p class="hero-bio">{identity.bio}</p>
+      {identity.bio.map((paragraph) => (
+        <p class="hero-bio">{paragraph}</p>
+      ))}
     </div>
 
     <figure class="portrait-frame">
