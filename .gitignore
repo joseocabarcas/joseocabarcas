@@ -27,3 +27,9 @@ pnpm-debug.log*
 
 # Vercel build output (keep project.json via CLI, ignore build artifacts)
 .vercel/
+
+# Local editor config
+.vscode/
+
+# Pi runtime state (project-local)
+.pi/
