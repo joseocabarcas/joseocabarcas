@@ -1,0 +1,120 @@
+---
+import type { AttributeGroup } from '../data/profile';
+
+export interface Props {
+  groups: ReadonlyArray<AttributeGroup>;
+}
+
+const { groups } = Astro.props;
+
+const primaryGroups = groups.filter((group) => group.level === 'Primary');
+const strongGroups = groups.filter((group) => group.level === 'Strong');
+const appliedGroups = groups.filter(
+  (group) => group.level === 'Working / Applied' && group.items.every((item) => item.experience === 'production')
+);
+const learningGroups = groups.filter((group) =>
+  group.items.some((item) => item.experience === 'learning')
+);
+---
+
+<section id="attributes" class="section" aria-labelledby="attributes-title">
+  <div class="section-head">
+    <p class="section-index">04 / ATTRIBUTES</p>
+    <h2 class="section-title" id="attributes-title">Attributes</h2>
+    <p class="section-subtitle">
+      A scouting report in sober text levels — Primary, Strong, Working /
+      Applied. No numeric ratings, percentiles, or years-per-skill claims:
+      levels are written as text so meaning survives grayscale and zoom.
+    </p>
+  </div>
+
+  <div class="attributes-board">
+    <div class="attributes-row attributes-row--primary">
+      {
+        primaryGroups.map((group) => (
+          <article class="attribute-group" data-reveal>
+            <div class="attribute-group-head">
+              <h3 class="attribute-title">{group.title}</h3>
+              <span class="badge">{group.level}</span>
+            </div>
+            <p class="attribute-description">{group.description}</p>
+            <ul class="attribute-items">
+              {group.items.map((item) => (
+                <li class="chip">
+                  {item.name}
+                  {item.note && <span class="chip-note">{item.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="attributes-row attributes-row--strong">
+      {
+        strongGroups.map((group) => (
+          <article class="attribute-group" data-reveal>
+            <div class="attribute-group-head">
+              <h3 class="attribute-title">{group.title}</h3>
+              <span class="badge">{group.level}</span>
+            </div>
+            <p class="attribute-description">{group.description}</p>
+            <ul class="attribute-items">
+              {group.items.map((item) => (
+                <li class="chip">
+                  {item.name}
+                  {item.note && <span class="chip-note">{item.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="attributes-row attributes-row--applied">
+      {
+        appliedGroups.map((group) => (
+          <article class="attribute-group" data-reveal>
+            <div class="attribute-group-head">
+              <h3 class="attribute-title">{group.title}</h3>
+              <span class="badge">{group.level}</span>
+            </div>
+            <p class="attribute-description">{group.description}</p>
+            <ul class="attribute-items">
+              {group.items.map((item) => (
+                <li class="chip">
+                  {item.name}
+                  {item.note && <span class="chip-note">{item.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="attributes-divider">Learning / exploration — not production experience</p>
+
+    {
+      learningGroups.map((group) => (
+        <article class="attribute-group attribute-group--learning" data-reveal>
+          <div class="attribute-group-head">
+            <h3 class="attribute-title">{group.title}</h3>
+            <span class="badge">{group.level}</span>
+          </div>
+          <p class="attribute-description">{group.description}</p>
+          <ul class="attribute-items">
+            {group.items.map((item) => (
+              <li class="chip">
+                {item.name}
+                {item.note && <span class="chip-note">{item.note}</span>}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>

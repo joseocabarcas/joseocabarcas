@@ -1,152 +1,33 @@
 ---
 const navItems = [
-  { href: '#about', label: 'About Me' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' }
+  { href: '#career-stats', label: 'Career Stats' },
+  { href: '#season-log', label: 'Season Log' },
+  { href: '#attributes', label: 'Attributes' },
+  { href: '#highlights', label: 'Highlights' },
+  { href: '#game-log', label: 'Game Log' },
+  { href: '#draft-me', label: 'Draft Me' },
 ];
 ---
 
-<header class="header">
-  <nav class="nav">
-    <div class="logo">&lt;JoseDev/&gt;</div>
-    <ul class="nav-links">
-      {navItems.map(item => (
-        <li><a href={item.href}>{item.label}</a></li>
-      ))}
-    </ul>
-    <button class="mobile-menu-btn" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </nav>
-</header>
-
-<style>
-  .header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 1rem 2rem;
-    background: rgba(26, 26, 46, 0.9);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(46, 204, 113, 0.2);
-    transition: background 0.3s ease;
-  }
-
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #2ecc71;
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-  }
-
-  .nav-links a {
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    position: relative;
-  }
-
-  .nav-links a:hover {
-    color: #2ecc71;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background: #2ecc71;
-    transition: width 0.3s ease;
-  }
-
-  .nav-links a:hover::after {
-    width: 100%;
-  }
-
-  .mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-  }
-
-  .mobile-menu-btn span {
-    width: 25px;
-    height: 3px;
-    background: #2ecc71;
-    margin: 3px 0;
-    transition: 0.3s;
-  }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-    
-    .mobile-menu-btn {
-      display: flex;
-    }
-  }
-</style>
-
-<script>
-  // Header scroll effect
-  function handleScroll(): void {
-    const header = document.querySelector('.header') as HTMLElement | null;
-    if (header) {
-      if (window.scrollY > 100) {
-        header.style.background = 'rgba(26, 26, 46, 0.95)';
-      } else {
-        header.style.background = 'rgba(26, 26, 46, 0.9)';
-      }
-    }
-  }
-
-  // Smooth scrolling
-  function handleSmoothScroll(): void {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
-      anchor.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId) {
-          const target = document.querySelector(targetId);
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
+<header class="site-header">
+  <div class="header-inner">
+    <span class="wordmark">JC <em>/</em> PROFILE</span>
+    <nav class="site-nav" aria-label="Primary">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav-list">
+        <span class="menu-toggle-label">Menu</span>
+      </button>
+      <ul class="nav-list" id="site-nav-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a class="nav-link" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
         }
-      });
-    });
-  }
-
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    handleSmoothScroll();
-  });
-
-  // Add scroll listener
-  window.addEventListener('scroll', handleScroll);
-</script>
+      </ul>
+      <a class="header-cta" href="#draft-me">Draft Me</a>
+    </nav>
+  </div>
+</header>

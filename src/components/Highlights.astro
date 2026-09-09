@@ -1,0 +1,43 @@
+---
+import type { Highlight } from '../data/profile';
+
+export interface Props {
+  highlights: ReadonlyArray<Highlight>;
+}
+
+const { highlights } = Astro.props;
+---
+
+<section id="highlights" class="section" aria-labelledby="highlights-title">
+  <div class="section-head">
+    <p class="section-index">05 / HIGHLIGHTS</p>
+    <h2 class="section-title" id="highlights-title">Highlights</h2>
+    <p class="section-subtitle">
+      Eight separate stories in moment / challenge / result form. Ownership and
+      outcomes are kept exactly as the record states them — no merged claims.
+    </p>
+  </div>
+
+  <div class="highlights-grid">
+    {
+      highlights.map((highlight, index) => (
+        <article class="highlight-card" data-reveal>
+          <p class="highlight-index">{String(index + 1).padStart(2, '0')}</p>
+          <h3 class="highlight-title">{highlight.title}</h3>
+          <div class="highlight-field">
+            <p class="highlight-field-label">MOMENT</p>
+            <p class="highlight-field-value">{highlight.moment}</p>
+          </div>
+          <div class="highlight-field">
+            <p class="highlight-field-label">CHALLENGE</p>
+            <p class="highlight-field-value">{highlight.challenge}</p>
+          </div>
+          <div class="highlight-field">
+            <p class="highlight-field-label">RESULT</p>
+            <p class="highlight-field-value">{highlight.result}</p>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

@@ -1,58 +1,54 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title: string;
-  description?: string;
+  description: string;
 }
 
-const { title, description = "Software Engineer" } = Astro.props;
+const { title, description } = Astro.props;
+
+const canonical = 'https://josecabarcas.dev/';
+const ogImage = '/og/jose-cabarcas-profile.png';
+
+// Google Fonts CSS: only the listed weights (Barlow Condensed 600/700,
+// IBM Plex Mono 400/500, DM Sans 400/500/600), non-blocking via
+// preload -> rel="stylesheet" swap, with a noscript fallback.
+const fontsHref =
+  'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap';
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="José Cabarcas — Senior Software Engineer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
-    <title>{title}</title>
+    <Fragment set:html={`<link rel="preload" as="style" href="${fontsHref}" onload="this.rel='stylesheet'" />`} />
+    <noscript><link rel="stylesheet" href={fontsHref} /></noscript>
+    <script src="../scripts/site.ts"></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
   </body>
 </html>
-
-<style is:global>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    color: #ffffff;
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #1a1a2e;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #2ecc71;
-    border-radius: 4px;
-  }
-</style>

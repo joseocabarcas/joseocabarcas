@@ -1,0 +1,51 @@
+---
+import type { SeasonLogEntry } from '../data/profile';
+
+export interface Props {
+  entries: ReadonlyArray<SeasonLogEntry>;
+}
+
+const { entries } = Astro.props;
+---
+
+<section id="season-log" class="section" aria-labelledby="season-log-title">
+  <div class="section-head">
+    <p class="section-index">03 / SEASON LOG</p>
+    <h2 class="section-title" id="season-log-title">Season Log</h2>
+    <p class="section-subtitle">
+      Six employer chapters, October 2014 through July 2026 — the full
+      chronology in order, readable as plain document content.
+    </p>
+  </div>
+
+  <ol class="season-rail">
+    {
+      entries.map((entry) => (
+        <li class="season-entry" id={entry.id} data-reveal>
+          <article class="season-panel">
+            <p class="season-dates">{entry.dates}</p>
+            <h3 class="season-employer">{entry.employer}</h3>
+            {entry.location && <p class="season-location">{entry.location}</p>}
+            <p class="season-summary">{entry.summary}</p>
+            {entry.roles.length > 1 || entry.roles.some((role) => role.summary) ? (
+              <ol class="season-roles">
+                {entry.roles.map((role) => (
+                  <li class="season-role">
+                    <span class="season-role-title">{role.title}</span>
+                    <span class="season-role-dates">{role.dates}</span>
+                    {role.summary && <p class="season-summary">{role.summary}</p>}
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p class="season-role-title">
+                {entry.roles[0].title}
+                <span class="season-role-dates">{entry.roles[0].dates}</span>
+              </p>
+            )}
+          </article>
+        </li>
+      ))
+    }
+  </ol>
+</section>

@@ -1,0 +1,58 @@
+---
+import type { HeroIdentity, ProfileLink } from '../data/profile';
+
+export interface Props {
+  identity: HeroIdentity;
+  links: ReadonlyArray<ProfileLink>;
+}
+
+const { identity, links } = Astro.props;
+
+const emailLink = links.find((link) => link.kind === 'email') as ProfileLink;
+const externalLinks = links.filter((link) => link.external);
+---
+
+<section id="draft-me" class="section" aria-labelledby="draft-me-title">
+  <div class="section-head">
+    <p class="section-index">07 / DRAFT ME</p>
+    <h2 class="section-title" id="draft-me-title">Draft Me</h2>
+  </div>
+
+  <div class="draft-panel">
+    <div>
+      <p class="draft-invite-title">Open to the next chapter</p>
+      <p class="draft-invite-copy">
+        The record above is the honest scouting report for {identity.name}: a
+        frontend and mobile specialist at Staff level, with real leadership and
+        production outcomes, who deliberately takes on backend work when the
+        problem requires it. If that profile fits your team, the next move is
+        one email away — no form, no middleman.
+      </p>
+      <div class="draft-actions">
+        <a class="btn btn-primary" href={emailLink.href}>{emailLink.label}</a>
+      </div>
+    </div>
+
+    <div class="draft-links">
+      <p class="footer-heading">Confirmed channels</p>
+      {
+        [emailLink, ...externalLinks].map((link) => (
+          <a
+            class="draft-link"
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noreferrer' : undefined}
+          >
+            <span class="draft-link-kind">{link.kind}</span>
+            <span>{link.label}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <p class="education-note">
+    Education — Diploma in Software Engineering (2016) · B.S. in Systems
+    Engineering (2011–2016), Universidad Simón Bolívar.
+  </p>
+</section>

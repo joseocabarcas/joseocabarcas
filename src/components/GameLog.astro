@@ -1,0 +1,57 @@
+---
+import type { GameLogCaseStudy } from '../data/profile';
+
+export interface Props {
+  caseStudies: ReadonlyArray<GameLogCaseStudy>;
+}
+
+const { caseStudies } = Astro.props;
+---
+
+<section id="game-log" class="section" aria-labelledby="game-log-title">
+  <div class="section-head">
+    <p class="section-index">06 / GAME LOG</p>
+    <h2 class="section-title" id="game-log-title">Game Log</h2>
+    <p class="section-subtitle">
+      Seven case studies in box-score form — context, role, stack, and the
+      documented outcome or responsibility. No fake scores, and no links the
+      record can't back.
+    </p>
+  </div>
+
+  <div class="gamelog-grid">
+    {
+      caseStudies.map((study) => (
+        <article class="case-card" data-reveal>
+          <div class="case-head">
+            <h3 class="case-name">{study.name}</h3>
+          </div>
+          <dl class="case-dl">
+            <div>
+              <dt class="case-term">Context</dt>
+              <dd class="case-desc">{study.context}</dd>
+            </div>
+            <div>
+              <dt class="case-term">Role</dt>
+              <dd class="case-desc">{study.role}</dd>
+            </div>
+            <div>
+              <dt class="case-term">Stack</dt>
+              <dd class="case-desc">
+                <ul class="case-stack-list">
+                  {study.stack.map((tech) => (
+                    <li class="chip">{tech}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt class="case-term">{study.outcomeLabel}</dt>
+              <dd class="case-desc">{study.outcome}</dd>
+            </div>
+          </dl>
+        </article>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+import type { CareerStat } from '../data/profile';
+
+export interface Props {
+  stats: ReadonlyArray<CareerStat>;
+}
+
+const { stats } = Astro.props;
+
+// Row 1: career + delivery cards. Then the labeled historical band holding the
+// two elenas-history cards side by side. Then the performance cards.
+// No metric is derived or invented; values/labels/details come from the data.
+const openingCards = stats.filter(
+  (stat) => stat.scope === 'career' || stat.scope === 'delivery'
+);
+const historicalCards = stats.filter((stat) => stat.scope === 'elenas-history');
+const performanceCards = stats.filter((stat) => stat.scope === 'performance');
+---
+
+<section id="career-stats" class="section" aria-labelledby="career-stats-title">
+  <div class="section-head">
+    <p class="section-index">02 / CAREER STATS</p>
+    <h2 class="section-title" id="career-stats-title">Career Stats</h2>
+    <p class="section-subtitle">
+      Verified numbers from the career record — every value labeled for what it
+      actually counts, and the Elenas scale figures presented as historical
+      context because the company later shut down.
+    </p>
+  </div>
+
+  <div class="stats-grid">
+    {
+      openingCards.map((stat) => (
+        <article class="stat-card" data-reveal>
+          <p class="stat-value">{stat.value}</p>
+          <p class="stat-label">{stat.label}</p>
+          <p class="stat-detail">{stat.detail}</p>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="stat-history-band" data-reveal>
+    <p class="stat-history-band-label">Historical — Elenas scale at departure (2024)</p>
+    <div class="stat-history-pair">
+      {
+        historicalCards.map((stat) => (
+          <article class="stat-card">
+            <p class="stat-value">{stat.value}</p>
+            <p class="stat-label">{stat.label}</p>
+            <p class="stat-detail">{stat.detail}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    {
+      performanceCards.map((stat) => (
+        <article class="stat-card" data-reveal>
+          <p class="stat-value">{stat.value}</p>
+          <p class="stat-label">{stat.label}</p>
+          <p class="stat-detail">{stat.detail}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,106 @@
+---
+import type { CareerStat, HeroIdentity, ProfileLink } from '../data/profile';
+import { profile } from '../data/profile';
+
+export interface Props {
+  identity: HeroIdentity;
+  links: ReadonlyArray<ProfileLink>;
+}
+
+const { identity, links } = Astro.props;
+
+interface HeroStatCard {
+  key: string;
+  value: string;
+  label: string;
+  detail: string;
+  historical: boolean;
+}
+
+const statsByKey = new Map(profile.stats.map((stat) => [stat.key, stat]));
+
+// Resolve heroStatKeys into the design §2 hero stat strip:
+// 11+ / years of experience, 5–7 / engineers led at Elenas, and the
+// historical 3M+ downloads · 200K+ DAU Elenas scale card with its
+// shutdown context adjacent — never in a tooltip.
+const heroStats: HeroStatCard[] = identity.heroStatKeys.map((key) => {
+  if (key === 'elenas-scale') {
+    const pair = profile.stats.filter((stat) => stat.scope === 'elenas-history');
+    const [downloads, dau] = pair;
+    return {
+      key,
+      value: `${downloads.value} downloads · ${dau.value} DAU`,
+      label: 'Elenas scale (historical)',
+      detail: 'By the time José left in 2024; the company later shut down.',
+      historical: true,
+    };
+  }
+  const stat = statsByKey.get(key) as CareerStat;
+  return {
+    key: stat.key,
+    value: stat.value,
+    label: stat.label,
+    detail: stat.detail,
+    historical: stat.historical ?? false,
+  };
+});
+
+const emailLink = links.find((link) => link.kind === 'email') as ProfileLink;
+---
+
+<section class="player-card" aria-labelledby="player-name">
+  <p class="player-card-index">
+    <span>PLAYER PROFILE / 01</span>
+    <span>{identity.location}</span>
+  </p>
+
+  <div class="player-card-top">
+    <div class="hero-identity">
+      <h1 class="hero-name" id="player-name">{identity.name}</h1>
+      <p class="hero-role">{identity.role}</p>
+      <p class="hero-status">
+        <span class="status-badge">{identity.status}</span>
+      </p>
+      <p class="hero-positioning">{identity.positioning}</p>
+      <p class="hero-bio">{identity.bio}</p>
+    </div>
+
+    <figure class="portrait-frame">
+      <picture>
+        {
+          identity.headshot.sources.map((source) => (
+            <source type={source.type} srcset={source.srcSet} />
+          ))
+        }
+        <img
+          src={identity.headshot.fallback}
+          width={identity.headshot.width}
+          height={identity.headshot.height}
+          sizes="(max-width: 700px) 42vw, 360px"
+          alt={identity.headshot.alt}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+    </figure>
+  </div>
+
+  <div class="hero-stats">
+    {
+      heroStats.map((stat) => (
+        <p class={stat.historical ? 'hero-stat hero-stat--history' : 'hero-stat'}>
+          <span class="hero-stat-value">{stat.value}</span>
+          <span class="hero-stat-label">{stat.label}</span>
+          <span class="hero-stat-detail">{stat.detail}</span>
+        </p>
+      ))
+    }
+  </div>
+
+  <div class="hero-actions">
+    <a class="btn btn-primary" href={emailLink.href}>{emailLink.label}</a>
+    <a class="btn btn-secondary" href="#career-stats">Career Stats</a>
+    <a class="btn btn-secondary" href="#draft-me">Draft Me</a>
+  </div>
+</section>
