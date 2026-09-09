@@ -60,11 +60,11 @@ Chain strategy: pending
 
 ### Task 5 — Layout shell rewrite (design §1, §4)
 
-- [x] Rewrite `src/layouts/Layout.astro` as the English document shell: `<html lang="en">`, skip link as first focusable element, fixed truthful metadata (title `José Cabarcas — Frontend Staff Engineer`, matching description, canonical `https://josecabarcas.dev/`, `og:*` and Twitter `summary_large_image` tags pointing to `/og/jose-cabarcas-profile.png`), `/favicon.svg` link, Google Fonts non-blocking strategy (preconnect ×2 with `crossorigin`, preload→`rel="stylesheet"` on `onload`, `noscript` fallback, only the listed Barlow Condensed 600/700, IBM Plex Mono 400/500, DM Sans 400/500/600 weights), and the `global.css` import. No synchronous render-blocking remote stylesheet in the built head. <!-- sdd-owner: implementation -->
+- [x] Rewrite `src/layouts/Layout.astro` as the English document shell: `<html lang="en">`, skip link as first focusable element, fixed truthful metadata (title `José Cabarcas — Frontend Staff Engineer`, matching description, canonical `https://josecabarcas.dev/`, `og:*` and Twitter `summary_large_image` tags pointing to `public/og/jose-cabarcas-profile.png`), `public/favicon.svg` link, Google Fonts non-blocking strategy (preconnect ×2 with `crossorigin`, preload→`rel="stylesheet"` on `onload`, `noscript` fallback, only the listed Barlow Condensed 600/700, IBM Plex Mono 400/500, DM Sans 400/500/600 weights), and the `global.css` import. No synchronous render-blocking remote stylesheet in the built head. <!-- sdd-owner: implementation -->
 
 **Scope:** rewrite `src/layouts/Layout.astro`.
 **Acceptance (specs: footer-metadata, accessibility, performance):** built `<head>` contains exactly the design metadata, non-blocking font links, and `lang="en"`; OG file referenced exists (Task 8).
-**Verification:** `pnpm build && grep -E 'lang="en"|og:image|fonts.googleapis|rel="preload"' dist/index.html`; no `stylesheet` link without `onload`/`noscript` pair.
+**Verification:** run `pnpm build`, then grep the built `dist/index.html` for `lang="en"`, `og:image`, `fonts.googleapis`, and `rel="preload"`; no `stylesheet` link without `onload`/`noscript` pair.
 
 ### Task 6 — Progressive enhancement script (design §1, §7)
 
@@ -76,7 +76,7 @@ Chain strategy: pending
 
 ### Task 7 — Portrait asset pipeline (design §5, §9 "Create" images)
 
-- [x] Generate committed portrait variants under `public/images/` from `/Users/josecabarcas/Downloads/Jose Omar Cabarcas Gutíerrez_A9A3905.jpg` (2400×3600, 2:3) at the design's exact dimensions: `jose-cabarcas-portrait-{640,960,1200}.avif`, `jose-cabarcas-portrait-{640,960,1200}.webp` (each at 640×960 / 960×1440 / 1200×1800), and `jose-cabarcas-portrait-960.jpg` (960×1440 fallback). First check encoder availability (`command -v cwebp avifenc magick`); macOS `sips` can only produce JPG (and resize). If `cwebp`/`avifenc`/ImageMagick are unavailable, fall back to `sips`-derived 960×1440 JPG plus whatever webp tooling exists, and document in the commit/PR exactly which variants were actually produced and which design-listed files are missing (the design treats the exact variant list as a release requirement — flag the gap, do not silently ship the 2400×3600 original as the only asset). Do not bake duotone/crop into the images (CSS-only treatment). <!-- sdd-owner: implementation -->
+- [x] Generate committed portrait variants under `public/images/` from `/Users/josecabarcas/Downloads/Jose Omar Cabarcas Gutíerrez_A9A3905.jpg` (read-only) (2400×3600, 2:3) at the design's exact dimensions: `jose-cabarcas-portrait-{640,960,1200}.avif`, `jose-cabarcas-portrait-{640,960,1200}.webp` (each at 640×960 / 960×1440 / 1200×1800), and `jose-cabarcas-portrait-960.jpg` (960×1440 fallback). First check encoder availability (`command -v cwebp avifenc magick`); macOS `sips` can only produce JPG (and resize). If `cwebp`/`avifenc`/ImageMagick are unavailable, fall back to `sips`-derived 960×1440 JPG plus whatever webp tooling exists, and document in the commit/PR exactly which variants were actually produced and which design-listed files are missing (the design treats the exact variant list as a release requirement — flag the gap, do not silently ship the 2400×3600 original as the only asset). Do not bake duotone/crop into the images (CSS-only treatment). <!-- sdd-owner: implementation -->
 
 **Scope:** create `public/images/jose-cabarcas-portrait-*` (7 target files); source Downloads file is preprocessing-only, never committed.
 **Acceptance (specs: player-card-hero, performance):** committed variants at exact dimensions preserving 2:3; raw 2400×3600 original is not the only browser asset in `dist/`.
@@ -198,5 +198,11 @@ Chain strategy: pending
 
 ## Parent-owned actions (post-apply)
 
-- [ ] Start or reuse bounded review covering the design §9 manifest completeness, content-truth spot checks against `Jose_Cabarcas_Portfolio_Context.md`, and the accessibility/static-delivery requirement matrix. <!-- sdd-owner: parent -->
-- [ ] Apply the ask-on-risk delivery decision recorded in the Review Workload Forecast (chain the suggested PR split or approve a size-exception single PR) before merging/promoting past the preview. <!-- sdd-owner: parent -->
+- [x] Start or reuse bounded review covering the design §9 manifest completeness, content-truth spot checks against `Jose_Cabarcas_Portfolio_Context.md`, and the accessibility/static-delivery requirement matrix. <!-- sdd-owner: parent -->
+- [x] Apply the ask-on-risk delivery decision recorded in the Review Workload Forecast (chain the suggested PR split or approve a size-exception single PR) before merging/promoting past the preview. <!-- sdd-owner: parent -->
+
+### Completion notes (2026-09-08, close)
+
+- Task 21: preview deployment Ready and validated; production promoted by the maintainer via Vercel dashboard (bio, footer fix, 7 case studies verified live at https://www.josecabarcas.dev).
+- Parent-owned review: the user-owned review switch is off for this clone (no review authority requested); coverage was provided by the verify phase (13/13 specs, envelope-validated verify-result), the maintainer's Task 20 manual review, and live production spot-checks.
+- Parent-owned delivery decision: resolved as `size:exception` single slice (maintainer-confirmed, pre-apply); merged to `main` and pushed.

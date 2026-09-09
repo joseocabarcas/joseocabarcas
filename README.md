@@ -1,48 +1,32 @@
-# Astro Starter Kit: Basics
+# josecabarcas.dev
+
+Personal portfolio of **José Cabarcas** — Senior Software Engineer (frontend & mobile specialist, 11+ years), Barranquilla, Colombia.
+
+**Live:** https://www.josecabarcas.dev
+
+Built as a custom NBA player-profile experience: a compact player-card hero above the fold, then scroll sections styled like an athlete profile — Career Stats, Season Log (career timeline 2014→2026), Attributes (qualitative skill levels), Highlights, Game Log (project case studies), and Draft Me (contact).
+
+## Stack
+
+- **Astro 5** — `output: 'static'`, zero framework hydration
+- **TypeScript** strict; typed content module (`src/data/profile.ts`) as the single source of professional claims
+- **CSS custom properties** design system (dark stadium, one electric accent) in `src/styles/global.css`
+- Progressive enhancement only (`src/scripts/site.ts`): accessible mobile menu + reduced-motion-gated reveals
+- **Vercel** CDN deployment (Git integration; previews via CLI)
+
+## Development
 
 ```sh
-npm create astro@latest -- --template basics
+pnpm install
+pnpm dev       # local dev server
+pnpm build     # astro check && astro build — the mandatory verification gate
+pnpm preview   # serve the production build locally
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Content discipline
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Every professional claim on the site traces to the verified career context. Content lives exclusively in `src/data/profile.ts` — edit facts there, never in components. Historical metrics (e.g. Elenas 3M+ downloads / 200K+ DAU) are explicitly framed as historical context.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Project history
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This site was rebuilt from the Astro starter through a full Spec-Driven Development flow. The complete planning record — proposal, 13 domain specs, design, task breakdown, apply progress, and the envelope-validated verify report — lives under [`openspec/`](openspec/), with the pre-rebuild state preserved at the `baseline-pre-nba-rebuild` git tag.
